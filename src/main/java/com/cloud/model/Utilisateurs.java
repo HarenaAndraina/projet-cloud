@@ -1,12 +1,12 @@
 package com.cloud.model;
 
-import org.joda.time.DateTime;
 import utilitaire.UtilDB;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 public class Utilisateurs {
 
@@ -17,8 +17,8 @@ public class Utilisateurs {
     private String nom;
     private String prenom;
     private String role;
-    private DateTime cree_le;
-    private DateTime modifie_le;
+    private LocalDateTime cree_le;
+    private LocalDateTime modifie_le;
 
     public int getId() {
         return id;
@@ -68,19 +68,19 @@ public class Utilisateurs {
         this.role = role;
     }
 
-    public DateTime getCree_le() {
+    public LocalDateTime getCree_le() {
         return cree_le;
     }
 
-    public void setCree_le(DateTime cree_le) {
+    public void setCree_le(LocalDateTime cree_le) {
         this.cree_le = cree_le;
     }
 
-    public DateTime getModifie_le() {
+    public LocalDateTime getModifie_le() {
         return modifie_le;
     }
 
-    public void setModifie_le(DateTime modifie_le) {
+    public void setModifie_le(LocalDateTime modifie_le) {
         this.modifie_le = modifie_le;
     }
 

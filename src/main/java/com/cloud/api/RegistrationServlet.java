@@ -61,8 +61,8 @@ public class RegistrationServlet extends HttpServlet {
     }
 
     private void sendVerificationEmail(String email, String token) {
-        final String senderEmail = "votre-email@gmail.com"; // Remplacez par votre email
-        final String senderPassword = "votre-mot-de-passe";
+        final String senderEmail = "rarianamiadana@gmail.com"; // Remplacez par votre email
+        final String senderPassword = "mgxypljhfsktzlbk";
 
         String host = "smtp.gmail.com";
         Properties props = new Properties();
@@ -84,7 +84,7 @@ public class RegistrationServlet extends HttpServlet {
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
             message.setSubject("Validation de votre inscription");
             message.setText("Cliquez sur le lien suivant pour valider votre compte : " +
-                    "http://localhost:8080/api/validate?token=" + token);
+                    "http://localhost:8080/projet_cloud/api/validate?token=" + token);
 
             Transport.send(message);
         } catch (MessagingException e) {

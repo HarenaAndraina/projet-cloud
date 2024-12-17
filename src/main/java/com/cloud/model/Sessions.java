@@ -1,13 +1,13 @@
 package com.cloud.model;
 
-import org.joda.time.DateTime;
+import java.time.LocalDateTime;
 
 public class Sessions {
 
     private int id;
     private String token;
-    private DateTime expire_le;
-    private DateTime cree_le;
+    private LocalDateTime expire_le;
+    private LocalDateTime cree_le;
     private int id_utilisateur;
 
     public int getId() {
@@ -26,19 +26,19 @@ public class Sessions {
         this.token = token;
     }
 
-    public DateTime getExpire_le() {
+    public LocalDateTime getExpire_le() {
         return expire_le;
     }
 
-    public void setExpire_le(DateTime expire_le) {
+    public void setExpire_le(LocalDateTime expire_le) {
         this.expire_le = expire_le;
     }
 
-    public DateTime getCree_le() {
+    public LocalDateTime getCree_le() {
         return cree_le;
     }
 
-    public void setCree_le(DateTime cree_le) {
+    public void setCree_le(LocalDateTime cree_le) {
         this.cree_le = cree_le;
     }
 
