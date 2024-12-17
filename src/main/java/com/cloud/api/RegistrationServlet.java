@@ -17,7 +17,7 @@ import java.util.UUID;
 @WebServlet("/api/register")
 public class RegistrationServlet extends HttpServlet {
 
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/user_registration";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/user_regi";
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = "root";
 
