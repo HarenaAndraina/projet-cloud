@@ -5,10 +5,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 import jakarta.mail.*;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
+import utilitaire.UtilDB;
+
 import java.io.IOException;
 import java.sql.*;
 import java.util.Properties;
@@ -17,9 +18,7 @@ import java.util.UUID;
 @WebServlet("/api/register")
 public class RegistrationServlet extends HttpServlet {
 
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/user_regi";
-    private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "root";
+    Connection connection = null;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -37,9 +36,11 @@ public class RegistrationServlet extends HttpServlet {
         // 2. Générer un token de vérification
         String token = UUID.randomUUID().toString();
 
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD)) {
+        try {
+
+            connection = new UtilDB().GetConn("postgres", "postgres");
             // 3. Insérer l'utilisateur dans la base de données
-            String insertQuery = "INSERT INTO users (email, password, verification_token) VALUES (?, ?, ?)";
+            String insertQuery = "INSERT INTO UTILISATEURS (email, mot_de_passe, nom, prenom, cree_le, modifie_le) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement stmt = connection.prepareStatement(insertQuery);
             stmt.setString(1, email);
             stmt.setString(2, password); // Ajoutez un hashage pour sécuriser le mot de passe
@@ -60,8 +61,8 @@ public class RegistrationServlet extends HttpServlet {
     }
 
     private void sendVerificationEmail(String email, String token) {
-        final String senderEmail = "votre-email@gmail.com"; // Remplacez par votre email
-        final String senderPassword = "votre-mot-de-passe";
+        final String senderEmail = "rarianamiadana@gmail.com"; // Remplacez par votre email
+        final String senderPassword = "mgxypljhfsktzlbk";
 
         String host = "smtp.gmail.com";
         Properties props = new Properties();
@@ -83,7 +84,7 @@ public class RegistrationServlet extends HttpServlet {
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
             message.setSubject("Validation de votre inscription");
             message.setText("Cliquez sur le lien suivant pour valider votre compte : " +
-                    "http://localhost:8080/api/validate?token=" + token);
+                    "http://localhost:8080/projet_cloud/api/validate?token=" + token);
 
             Transport.send(message);
         } catch (MessagingException e) {
