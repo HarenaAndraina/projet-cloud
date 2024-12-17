@@ -1,0 +1,26 @@
+Sub Create_Tables()
+
+DoCmd.RunSQL "CREATE TABLE utilisateurs(" & _
+   "id VARCHAR(50)," & _
+   "email VARCHAR(255) NOT NULL," & _
+   "mot_de_passe VARCHAR(255) NOT NULL," & _
+   "nom VARCHAR(255)," & _
+   "prenom VARCHAR(255)," & _
+   "role VARCHAR(50)," & _
+   "cree_le DATETIME," & _
+   "modifie_le DATETIME," & _
+   "PRIMARY KEY(id)," & _
+   "UNIQUE(email)" & _
+");"   
+
+DoCmd.RunSQL "CREATE TABLE sessions(" & _
+   "id VARCHAR(50)," & _
+   "token VARCHAR(255)," & _
+   "expire_le DATETIME," & _
+   "cree_le DATETIME," & _
+   "id_1 VARCHAR(50) NOT NULL," & _
+   "PRIMARY KEY(id)," & _
+   "FOREIGN KEY(id_1) REFERENCES utilisateurs(id)" & _
+");"   
+
+End Sub
